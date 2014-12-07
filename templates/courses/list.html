@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
 
-    <title>Starter Template for Bootstrap</title>
+    <title>Courses ItBursa</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{% static "dist/css/bootstrap.min.css" %}" rel="stylesheet">
@@ -29,24 +29,45 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
+          <a class="navbar-brand" href="/">IT Bursa</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li {# class="active" #}><a href="/students/">Students</a></li>
+            <li class="active"><a href="/courses/">Courses</a></li>
+            <li {# class="active" #}><a href="/coaches/">Coaches</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
 
     <div class="container">
+        <h1>PyBursa Students list</h1>
 
-      <div class="starter-template">
-        <h1>Bootstrap starter template</h1>
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
-      </div>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Название</th>
+              <th>Дата начала</th>
+              <th>Дата окончания</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for course in courses %}
+            <tr>
+              <td>{{ course.id }}</td>
+              <td>
+                  <a href="/courses/{{ course.id }}/">
+                    {{ course.course_name }}
+                </a>
+              </td>
+              <td>{{ course.date_of_start }}</td>
+              <td>{{ course.date_of_end }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
 
     </div><!-- /.container -->
 
@@ -54,8 +75,8 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="jquery.min.js"></script>
-    <script src="bootstrap.min.js"></script>
-  
+    <script src="{% static "js/jquery.min.js" %}" ></script>
+    <script src="{% static "dist/js/bootstrap.min.js" %}" ></script>
+
 
 </body></html>
