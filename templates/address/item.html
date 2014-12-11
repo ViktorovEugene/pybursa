@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
 
-    <title>IT Bursa</title>
+    <title>Course address</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{% static "dist/css/bootstrap.min.css" %}" rel="stylesheet">
@@ -43,11 +43,16 @@
     </nav>
 
     <div class="container">
+      <h1>Address of {{ course.name }} </h1>
+      <ul class="list-group">
+        <li class="list-group-item">Country: {{ address.country }}</li>
+        <li class="list-group-item">Index: {{ address.post_index}}</li>
+        <li class="list-group-item">Region: {{ address.region }}</li>
+        <li class="list-group-item">District: {{ address.district }}</li>
+        <li class="list-group-item">Street: {{ address.street }}</li>
+        <li class="list-group-item">House: {{ address.house }}</li>
 
-      <div class="starter-template">
-        <h1>Hello!</h1>
-        <p class="lead">This is poject created by Viktorov Eugeny.</p>
-      </div>
+      </ul>
 
     </div><!-- /.container -->
 

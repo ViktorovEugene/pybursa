@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
 
-    <title>IT Bursa</title>
+    <title>Addresses</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{% static "dist/css/bootstrap.min.css" %}" rel="stylesheet">
@@ -36,18 +36,29 @@
             <li {# class="active" #}><a href="/students/">Students</a></li>
             <li {# class="active" #}><a href="/courses/">Courses</a></li>
             <li {# class="active" #}><a href="/coaches/">Coaches</a></li>
-            <li {# class="active" #}><a href="/address/">Address</a></li>
+            <li class="active"><a href="/address/">Address</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
 
     <div class="container">
+        <h1>IT Bursa Adresses list</h1>
+        <ul class="list-group">
 
-      <div class="starter-template">
-        <h1>Hello!</h1>
-        <p class="lead">This is poject created by Viktorov Eugeny.</p>
-      </div>
+            {% for address in addresses %}
+                {% if address.course_venue.all %}
+                    {% for course in address.course_venue.all %}
+                        <li class="list-group-item">
+                            <a href="/address/{{ address.id }}/">
+                                {{ course.name }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                {% endif %}
+
+            {% endfor %}
+        </ul>
 
     </div><!-- /.container -->
 

@@ -36,6 +36,7 @@
             <li {# class="active" #}><a href="/students/">Students</a></li>
             <li class="active"><a href="/courses/">Courses</a></li>
             <li {# class="active" #}><a href="/coaches/">Coaches</a></li>
+            <li {# class="active" #}><a href="/address/">Address</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -59,11 +60,11 @@
               <td>{{ course.id }}</td>
               <td>
                   <a href="/courses/{{ course.id }}/">
-                    {{ course.course_name }}
+                    {{ course.name }}
                 </a>
               </td>
-              <td>{{ course.date_of_start }}</td>
-              <td>{{ course.date_of_end }}</td>
+              <td>{{ course.start_date }}</td>
+              <td>{{ course.end_date }}</td>
             </tr>
             {% endfor %}
           </tbody>

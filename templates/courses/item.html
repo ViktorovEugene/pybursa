@@ -36,6 +36,7 @@
             <li {# class="active" #}><a href="/students/">Students</a></li>
             <li {# class="active" #}><a href="/courses/">Courses</a></li>
             <li {# class="active" #}><a href="/coaches/">Coaches</a></li>
+            <li {# class="active" #}><a href="/address/">Address</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -45,10 +46,10 @@
 
       <h1>Student: {{ course.course_name }}</h1>
       <ul class="list-group">
-        <li class="list-group-item">Язык программирования: {{ course.language }}</li>
-        <li class="list-group-item">Начало: {{ course.date_of_start }}</li>
-        <li class="list-group-item">Конец: {{ course.date_of_end }}</li>
-        <li class="list-group-item">Преподаватель: {{ course.instructor }}</li>
+        <li class="list-group-item">Язык программирования: {{ course.tecnology }}</li>
+        <li class="list-group-item">Начало: {{ course.start_date }}</li>
+        <li class="list-group-item">Конец: {{ course.end_date }}</li>
+        <li class="list-group-item">Преподаватель: {{ course.coach }}</li>
         <li class="list-group-item">Ассистент: {{ course.assistant }}</li>
         <li class="list-group-item">Описание: <br> {{ course.description }}</li>
 
