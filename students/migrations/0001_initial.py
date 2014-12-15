@@ -12,15 +12,27 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
+            name='Group',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=225)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
             name='Student',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=225)),
                 ('surname', models.CharField(max_length=225)),
+                ('slug', models.SlugField()),
                 ('email', models.EmailField(max_length=75)),
                 ('phone', models.CharField(max_length=15, blank=True)),
-                ('package', models.CharField(default=b's', max_length=1, choices=[(b's', b'Standart'), (b'g', b'Glod'), (b'p', b'Platinum')])),
+                ('package', models.CharField(default=b'standart', max_length=8, choices=[(b'standart', b'Standart'), (b'gold', b'Glod'), (b'platimun', b'Platinum')])),
                 ('courses', models.ManyToManyField(to='courses.Course', blank=True)),
+                ('group', models.ForeignKey(related_name='students', default=b'', blank=True, to='students.Group')),
             ],
             options={
             },

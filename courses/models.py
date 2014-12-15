@@ -6,9 +6,9 @@ from coaches.models import Coach
 
 class Course(models.Model):
     TECNOLOGY_CHOISE = (
-        ('p', 'Python'),
-        ('r', 'Ruby'),
-        ('j', 'JavaScript'),
+        ('python', 'Python'),
+        ('rubby', 'Ruby'),
+        ('javascript', 'JavaScript'),
     )
     name = models.CharField(max_length=225)
     description= models.TextField()
@@ -17,8 +17,9 @@ class Course(models.Model):
                                   related_name='course_assistant')
     start_date = models.DateField()
     end_date = models.DateField()
-    tecnology = models.CharField(max_length=225, choices=TECNOLOGY_CHOISE)
+    tecnology = models.CharField(max_length=11, choices=TECNOLOGY_CHOISE)
     venue = models.ForeignKey(Address, related_name='course_venue')
+    slug = models.SlugField()
 
     def __unicode__(self):
         return '%s (%s) - %s' % (self.name, self.coach, self.tecnology)

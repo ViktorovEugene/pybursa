@@ -9,4 +9,4 @@ class Address(models.Model):
     house = models.CharField(max_length=30)
 
     def __unicode__(self):
-        return '%s, %s, %s' % (self.coutry, self.region, self.street)
+        return '%s, %s, %s' % (self.country, self.region, self.street)
