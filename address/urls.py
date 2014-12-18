@@ -4,7 +4,7 @@ from address.views import course_addresses, course_address
 
 urlpatterns = patterns('',
 
-    url(r'^$', course_addresses),
-    url(r'^(?P<address_id>\d+)/$', course_address),
+    url(r'^$', course_addresses, name='course_addresses'),
+    url(r'^(?P<address_id>\d+)/$', course_address, name='course_address'),
 
 )

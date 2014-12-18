@@ -1,4 +1,5 @@
 from django.db import models
+# from courses.models import Course
 
 class Address(models.Model):
     post_index = models.CharField(max_length=60)
@@ -8,5 +9,31 @@ class Address(models.Model):
     street = models.CharField(max_length=30)
     house = models.CharField(max_length=30)
 
+    def course_address(self):
+  		name = self.course_venue.values('name')
+  		name = name[0]
+  		return name['name']
+
     def __unicode__(self):
         return '%s, %s, %s' % (self.country, self.region, self.street)
+
+
+
+class Dossier(models.Model):
+ 	COLOR_CHOISES = (
+ 		('red', 'red'),
+ 		('orange', 'orange'),
+ 		('yellow', 'yellow'),
+ 		('green', 'green'),
+ 		('azure', 'azure'),
+ 		('blue', 'blue'),
+ 		('violet', 'violet'),
+ 	)
+	address = models.ForeignKey(Address, related_name='dissier_address',
+		blank=True)
+	courses = models.ManyToManyField('courses.Course', blank=True, 
+		related_name='dossier_courses')
+	color = models.CharField(max_length=6, choices=COLOR_CHOISES, default='red')
+    
+	def __unicode__(self):
+		return self.color

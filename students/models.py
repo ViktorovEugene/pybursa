@@ -1,5 +1,5 @@
 from django.db import models
-from courses.models import Course
+# from courses.models import Course
 
 class Group(models.Model):
     name = models.CharField(max_length=225)
@@ -19,7 +19,7 @@ class Student(models.Model):
     date_of_birth = models.DateField(blank=True, null=True)
     email = models.EmailField()
     phone = models.CharField(max_length=15, blank=True)
-    courses = models.ManyToManyField(Course, blank=True)
+    courses = models.ManyToManyField('courses.Course', blank=True)
     package = models.CharField(max_length=8, choices=PACKAGE_CHOISES,
                                default='standart')
     group = models.ForeignKey(Group, related_name = 'students', default="")

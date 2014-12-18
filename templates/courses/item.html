@@ -1,49 +1,9 @@
-{% load static %}<!DOCTYPE html>
-<!-- saved from url=(0050)http://getbootstrap.com/examples/starter-template/ -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
+{% extends "courses/list.html" %}
+{% load static %}
 
-    <title>Starter Template for Bootstrap</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="{% static "dist/css/bootstrap.min.css" %}" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="{% static "examples/starter-template.css" %}" rel="stylesheet">
-
-  </head>
-
-  <body>
-
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/">IT Bursa</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li {# class="active" #}><a href="/students/">Students</a></li>
-            <li {# class="active" #}><a href="/courses/">Courses</a></li>
-            <li {# class="active" #}><a href="/coaches/">Coaches</a></li>
-            <li {# class="active" #}><a href="/address/">Address</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
-
+{% block content %}
     <div class="container">
-
       <h1>Student: {{ course.course_name }}</h1>
       <ul class="list-group">
         <li class="list-group-item">Язык программирования: {{ course.tecnology }}</li>
@@ -52,17 +12,6 @@
         <li class="list-group-item">Преподаватель: {{ course.coach }}</li>
         <li class="list-group-item">Ассистент: {{ course.assistant }}</li>
         <li class="list-group-item">Описание: <br> {{ course.description }}</li>
-
       </ul>
-
-    </div><!-- /.container -->
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="{% static "js/jquery.min.js" %}" ></script>
-    <script src="{% static "dist/js/bootstrap.min.js" %}" ></script>
-
-
-</body></html>
+    </div>
+{% endblock content %}

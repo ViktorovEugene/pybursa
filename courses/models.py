@@ -1,7 +1,6 @@
 from django.db import models
-from address.models import Address
-
-from coaches.models import Coach
+# from coaches.models import Coach
+# from address.models import Address
 
 
 class Course(models.Model):
@@ -12,13 +11,13 @@ class Course(models.Model):
     )
     name = models.CharField(max_length=225)
     description= models.TextField()
-    coach = models.ForeignKey(Coach)
-    assistant = models.ForeignKey(Coach, blank=True, null=True,
+    coach = models.ForeignKey('coaches.Coach')
+    assistant = models.ForeignKey('coaches.Coach', blank=True, null=True,
                                   related_name='course_assistant')
     start_date = models.DateField()
     end_date = models.DateField()
     tecnology = models.CharField(max_length=11, choices=TECNOLOGY_CHOISE)
-    venue = models.ForeignKey(Address, related_name='course_venue')
+    venue = models.ForeignKey('address.Address', related_name='course_venue')
     slug = models.SlugField()
 
     def __unicode__(self):
