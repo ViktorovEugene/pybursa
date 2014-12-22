@@ -9,5 +9,13 @@
         <li class="list-group-item">Телефон: {{ student.phone }}</li>
         <li class="list-group-item">Пакет: {{ student.package }}</li>
       </ul>
+	  <div class="btn-group pull-right">
+		<a  href="{% url 'student_new' %}">
+          <button class="btn btn-success" type="button">add student</button></a>
+		  <a  href="{% url 'student_edit' student.id %}">
+		    <button class="btn btn-warning  " type="button">edit</button></a>
+		  <a  href="{% url 'student_delete' student.id %}">
+		    <button class="btn btn-danger" type="button">delete</button></a>
+	  </div>
     </div>
 {% endblock content %}

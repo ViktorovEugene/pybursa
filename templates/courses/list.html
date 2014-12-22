@@ -1,19 +1,10 @@
-{% extends "pybursa/base.html" %}
+{% extends "courses/base.html" %}
 {% load static %}
-
-
-{% block nav %}
-  <li {# class="active" #}><a href="/students/">Students</a></li>
-  <li class="active"><a href="/courses/">Courses</a></li>
-  <li {# class="active" #}><a href="/coaches/">Coaches</a></li>
-  <li {# class="active" #}><a href="/address/">Address</a></li>
-{% endblock nav %}
-
 
 
 {% block content %}
   <div class="container">
-      <h1>PyBursa Students list</h1>
+      <h1>IT Bursa course list</h1>
       <table class="table table-bordered">
         <thead>
           <tr>
@@ -21,6 +12,10 @@
             <th>Название</th>
             <th>Дата начала</th>
             <th>Дата окончания</th>
+            <th>
+              <a  href="{% url 'course_new' %}">
+                <button class="btn btn-success" type="button">add coach</button></a>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -28,12 +23,20 @@
           <tr>
             <td>{{ course.id }}</td>
             <td>
-                <a href="{% url 'courses_item' course.id %}">
+                <a href="{% url 'course_item' course.id %}">
                   {{ course.name }}
               </a>
             </td>
             <td>{{ course.start_date }}</td>
             <td>{{ course.end_date }}</td>
+            <td>
+              <div class="btn-group">
+                <a  href="{% url 'course_edit' course.id %}">
+                  <button class="btn btn-warning" type="button">edit</button></a>
+                <a  href="{% url 'course_delete' course.id %}">
+                  <button class="btn btn-danger" type="button">delete</button></a>
+              </div>
+            </td>
           </tr>
           {% endfor %}
         </tbody>

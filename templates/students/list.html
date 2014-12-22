@@ -12,13 +12,22 @@
 
 {% block content %}
     <div class="container">
-        <h1>PyBursa Students list</h1>
+        <h1>IT Bursa students list</h1>
+        <a  href="{% url 'student_new' %}">
+          <button class="btn btn-success" type="button">add student</button></a>
+        <p></p>
         <ul class="list-group">
             {% for student in students %}
             <li class="list-group-item">
                 <a href="{% url 'student_item' student.id %}">
                     {{ student.surname }} {{ student.name }}
                 </a>
+                <div class="btn-group pull-right">
+                  <a  href="{% url 'student_edit' student.id %}">
+                    <button class="btn btn-warning  " type="button">edit</button></a>
+                  <a  href="{% url 'student_delete' student.id %}">
+                    <button class="btn btn-danger" type="button">delete</button></a>
+                </div>
             </li>
             {% endfor %}
         </ul>

@@ -1,13 +1,31 @@
-{% extends "coaches/list.html" %}
+{% extends "coaches/base.html" %}
 {% load static %}
 
 
 {% block content %}
+{{ block.super }}
     <div class="container">
       <h1>Coach: {{ coach.surname }} {{ coach.name }}</h1>
       <ul class="list-group">
-        <li class="list-group-item">Должность: {{ coach.status }}</li>
-        <li class="list-group-item">Email: {{ coach.email }}</li>
+        <li class="list-group-item">{{ coach.status }}</li>
+        <li class="list-group-item">{{ coach.email }}</li>
+        <li class="list-group-item">{{ coach.phone_number }}</li>
+        <li class="list-group-item">{{ coach.user }}</li>
       </ul>
+	  <div class="btn-group pull-right">
+	    <a  href="{% url 'coach_edit' coach.id %}">
+	      <button class="btn btn-warning  " type="button">edit</button></a>
+	    <a  href="{% url 'coach_delete' coach.id %}">
+	      <button class="btn btn-danger" type="button">delete</button></a>
+	    <a  href="{% url 'coach_new' %}">
+          <button class="btn btn-success" type="button">new coach</button></a>
+	  </div>
     </div>
 {% endblock content %}
+
+ name = models.CharField(max_length=225)
+    surname = models.CharField(max_length=225)
+    email = models.EmailField(default='example@gmail.com')
+    status = models.CharField(choices=COACH_TYPES, max_length=9,)
+    phone_number = models.CharField(max_length=15, default='+38000000000')
+    user = models.ForeignKey(User, blank=True, null=True)

@@ -1,10 +1,10 @@
-{% extends "courses/list.html" %}
+{% extends "courses/base.html" %}
 {% load static %}
 
 
 {% block content %}
     <div class="container">
-      <h1>Student: {{ course.course_name }}</h1>
+      <h1>Course: {{ course.course_name }}</h1>
       <ul class="list-group">
         <li class="list-group-item">Язык программирования: {{ course.tecnology }}</li>
         <li class="list-group-item">Начало: {{ course.start_date }}</li>
@@ -13,5 +13,13 @@
         <li class="list-group-item">Ассистент: {{ course.assistant }}</li>
         <li class="list-group-item">Описание: <br> {{ course.description }}</li>
       </ul>
+    </div>
+    <div class="btn-group pull-right">
+      <a  href="{% url 'course_edit' course.id %}">
+        <button class="btn btn-warning  " type="button">edit</button></a>
+      <a  href="{% url 'course_delete' course.id %}">
+        <button class="btn btn-danger" type="button">delete</button></a>
+      <a  href="{% url 'course_new' %}">
+          <button class="btn btn-success" type="button">new course</button></a>
     </div>
 {% endblock content %}

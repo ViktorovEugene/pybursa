@@ -1,4 +1,4 @@
-{% extends "pybursa/base.html" %}
+{% extends "coaches/base.html" %}
 {% load static %}
 
 
@@ -13,14 +13,23 @@
 
 {% block content %}
     <div class="container">
-        <h1>PyBursa Coaches list</h1>
-        <ul class="list-unstyled">
+        <h1>IT Bursa coaches list</h1>
+        <a  href="{% url 'coach_new' %}">
+          <button class="btn btn-success" type="button">add coach</button></a>
+        <p></p>
+        <ul class="list-group">
             {% for coach in coaches %}
-            <li class="list-group-item">
+            <li  class="list-group-item" style="font-size: 18px">
                 {{coach.id}}
-                <a href="{% url 'coaches_item' coach.id %}">
-                    {{ coach.surname }} {{ coach.name }}
-                </a>
+                <a href="{% url 'coach_item' coach.id %}">
+                  {{ coach.surname }} {{ coach.name }}</a>
+
+                <div class="btn-group pull-right">
+                  <a  href="{% url 'coach_edit' coach.id %}">
+                    <button class="btn btn-warning  " type="button">edit</button></a>
+                  <a  href="{% url 'coach_delete' coach.id %}">
+                    <button class="btn btn-danger" type="button">delete</button></a>
+                </div>
             </li>
             {% endfor %}
         </ul>

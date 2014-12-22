@@ -19,7 +19,7 @@ class Student(models.Model):
     date_of_birth = models.DateField(blank=True, null=True)
     email = models.EmailField()
     phone = models.CharField(max_length=15, blank=True)
-    courses = models.ManyToManyField('courses.Course', blank=True)
+    courses = models.ManyToManyField('courses.Course')
     package = models.CharField(max_length=8, choices=PACKAGE_CHOISES,
                                default='standart')
     group = models.ForeignKey(Group, related_name = 'students', default="")
