@@ -20,7 +20,8 @@
             {% for student in students %}
             <li class="list-group-item">
                 <a href="{% url 'student_item' student.id %}">
-                    {{ student.surname }} {{ student.name }}
+                    {{ student.surname }} {{ student.name }} 
+                    {{ student.pk }}
                 </a>
                 <div class="btn-group pull-right">
                   <a  href="{% url 'student_edit' student.id %}">

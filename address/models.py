@@ -9,11 +9,6 @@ class Address(models.Model):
     street = models.CharField(max_length=30)
     house = models.CharField(max_length=30)
 
-    def course_address(self):
-  		name = self.course_venue.values('name')
-  		name = name[0]
-  		return name['name']
-
     def __unicode__(self):
         return '%s, %s, %s' % (self.country, self.region, self.street)
 

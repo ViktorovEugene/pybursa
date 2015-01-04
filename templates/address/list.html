@@ -15,15 +15,15 @@
         <h1>IT Bursa Adresses list</h1>
         <ul class="list-group">
             {% for address in addresses %}
+            <li class="list-group-item">
+                <a href="{% url 'course_address' address.id %}">
+                    {{ address.id }} 
                 {% if address.course_venue.all %}
-                    {% for course in address.course_venue.all %}
-                        <li class="list-group-item">
-                            <a href="{% url 'course_address' address.id %}">
-                                {{ course.name }}
-                            </a>
-                        </li>
-                    {% endfor %}
-                {% endif %}
+                {% for course in address.course_venue.all %}
+                    {{ course.name }}
+                {% endfor %}
+                {% endif %} </a>         
+            </li>
             {% endfor %}
         </ul>
     </div>
