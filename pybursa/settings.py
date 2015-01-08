@@ -38,6 +38,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'debug_toolbar',
+    'django_extensions',
     'students',
     'courses',
     'coaches',
@@ -102,3 +104,44 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+LOGGING = {
+    'version': 1,
+    'formatters': {
+        'main': {
+            'format': '[%(asctime)s] %(name)s - %(levelname)s - %(message)s',
+            'datefmt': '%m/%d/%Y %I:%M:%S %p',
+
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'main',
+        },
+        'debug_file':{
+            'level' : 'INFO',
+            'class' : 'logging.FileHandler',
+            'filename' : os.path.join(BASE_DIR, 'loggers'),
+            'formatter': 'main',
+        },
+    },
+    'loggers': {
+        'pybursa': {
+            'handlers': ['console', 'debug_file'],
+            'level': 'DEBUG',
+        },
+        'students': {
+            'handlers': ['console', 'debug_file'],
+            'level': 'DEBUG',
+        },
+        'courses': {
+            'handlers': ['console', 'debug_file'],
+            'level': 'DEBUG',
+        },
+        'coaches': {
+            'handlers': ['console', 'debug_file'],
+            'level': 'DEBUG',
+        },
+    },
+}

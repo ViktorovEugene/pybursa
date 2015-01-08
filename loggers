@@ -1,0 +1,16 @@
+[01/08/2015 12:25:17 AM] pybursa.views - INFO - Delation massage was send from example@mail.com to dixon@gmail.com.
+[01/08/2015 12:25:38 AM] pybursa.views - INFO - Delation massage was send from example@mail.com to dixon@gmail.com.
+[01/08/2015 12:26:50 AM] pybursa.views - INFO - Delation massage was send from example@mail.com to dixon@gmail.com.
+[01/08/2015 12:35:50 AM] students.views - INFO - Object Student 41 was deleted.
+[01/08/2015 12:37:26 AM] students.views - INFO - Object Student 41 was deleted.
+[01/08/2015 12:37:31 AM] students.views - INFO - Object Student 40 was deleted.
+[01/08/2015 12:37:41 AM] students.views - INFO - Object Student 39 was deleted.
+[01/08/2015 12:37:45 AM] students.views - INFO - Object Student 38 was deleted.
+[01/08/2015 12:40:36 AM] students.views - INFO - Object Student 42 was created.
+[01/08/2015 12:42:15 AM] students.views - INFO - Object Student 42 was updated.
+[01/08/2015 12:42:55 AM] courses.views - INFO - Object Course 9 was created.
+[01/08/2015 12:43:14 AM] courses.views - INFO - Object Course 3 was updated.
+[01/08/2015 12:43:23 AM] courses.views - INFO - Object Course 9 was deleted.
+[01/08/2015 12:43:35 AM] coaches.views - INFO - Object Coach 46 was created.
+[01/08/2015 12:43:55 AM] coaches.views - INFO - Object Coach 2 was updated.
+[01/08/2015 12:44:09 AM] coaches.views - INFO - Object Coach 46 was deleted.

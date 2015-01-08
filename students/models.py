@@ -1,5 +1,5 @@
 from django.db import models
-# from courses.models import Course
+
 
 class Group(models.Model):
     name = models.CharField(max_length=225)
@@ -23,6 +23,9 @@ class Student(models.Model):
     package = models.CharField(max_length=8, choices=PACKAGE_CHOISES,
                                default='standart')
     group = models.ForeignKey(Group, related_name = 'students', default="")
+
+    def get_absolute_url(self):
+        return "/students/%i/" % self.id
 
     def __unicode__(self):
         return u"%s %s" % (self.surname, self.name)

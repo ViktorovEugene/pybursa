@@ -20,5 +20,8 @@ class Course(models.Model):
     venue = models.ForeignKey('address.Address', related_name='course_venue')
     slug = models.SlugField()
 
+    def get_absolute_url(self):
+        return "/courses/%i/" % self.id
+
     def __unicode__(self):
         return '%s (%s) - %s' % (self.name, self.coach, self.tecnology)

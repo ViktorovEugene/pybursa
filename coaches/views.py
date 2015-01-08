@@ -1,50 +1,53 @@
-from django.shortcuts import render, redirect
+from django.core.urlresolvers import reverse_lazy
+
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
+from pybursa.loggers import LoggingMix
+from pybursa.decorators import (delete_logging_method_decorator,
+								create_logging_method_decorator,
+								update_logging_method_decorator)
+
 from coaches.models import Coach
-from django import forms
 
 
-class CoachForm(forms.ModelForm):
-	class Meta:
-		model = Coach
+class CoachListView(ListView):
+	model = Coach
+	template_name = 'coaches/list.html'
+	context_object_name = 'coaches'
 
 
-def coaches_list(request):
-    coaches = Coach.objects.all()
-    return render(request, 'coaches/list.html', {'coaches': coaches},)
+class CoachDetailView(DetailView):
+	model = Coach
+	template_name = 'coaches/item.html'
 
-def coach_item(request, coach_id):
-    coach = Coach.objects.get(id=coach_id)
-    return render(request, 'coaches/item.html', {'coach': coach},)
 
-def coach_edit(request, coach_id):
-	title = 'Edit coach'
-	coach = Coach.objects.get(id=coach_id)
-	if request.method == 'POST':
-		form = CoachForm(request.POST, instance=coach)
-		if form.is_valid():
-			coach = form.save()
-			return redirect('coach_edit', coach.id,)
-	else:
-		form = CoachForm(instance=coach)
+class CoachCreateView(LoggingMix, CreateView):
+	model = Coach
+	template_name = 'coaches/edit.html'
+	success_url = reverse_lazy('coaches_list')
 
-	return render(request, 'coaches/edit.html',
-		                   {'form': form,
-		                    'title': title,
-		                    'coach': coach})
+	@create_logging_method_decorator
+	def get_success_url(self, *args, **kwargs):
+		return super(CoachCreateView, self).get_success_url(*args, **kwargs)
 
-def coach_new(request):
-	title = 'Add new coach'
-	if request.method == "POST":
-		form = CoachForm(request.POST)
-		if form.is_valid():
-			coach = form.save()
-			return redirect('coaches_list')
-	else:
-		form = CoachForm()
-	return render(request, 'coaches/edit.html', {'form': form,
-												 'title': title})
 
-def coach_delete(request, coach_id):
-	coach = Coach.objects.get(id=coach_id)
-	coach.delete()
-	return redirect('coaches_list')
+class CoachUpdateView(LoggingMix, UpdateView):
+	model = Coach
+	template_name  = 'coaches/edit.html'
+
+	@update_logging_method_decorator
+	def get_success_url(self, *args, **kwargs):
+		return super(CoachUpdateView, self).get_success_url(*args, **kwargs)
+
+
+class CoachDeleteView(LoggingMix, DeleteView):
+	model = Coach
+	success_url = reverse_lazy('coaches_list')
+
+	@delete_logging_method_decorator
+	def get_success_url(self, *args, **kwargs):
+		return super(CoachDeleteView, self).get_success_url(*args, **kwargs)
+		
+		

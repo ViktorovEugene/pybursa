@@ -1,15 +1,15 @@
 from django.conf.urls import patterns, include, url
-from coaches.views import (coaches_list, coach_item, coach_edit, 
-						  coach_delete, coach_new)
+from coaches.views import (CoachListView, CoachDetailView, CoachUpdateView, 
+						  CoachDeleteView, CoachCreateView)
 
 
 urlpatterns = patterns('',
 
-    url(r'^$', coaches_list, name='coaches_list'),
-    url(r'^new/$', coach_new, name='coach_new'),
-    url(r'^(?P<coach_id>\d+)/$', coach_item, name='coach_item'),
-    url(r'^edit/(?P<coach_id>\d+)/$', coach_edit, name='coach_edit'),
-    url(r'^delete/(?P<coach_id>\d+)/$', coach_delete, name='coach_delete'),
+    url(r'^$', CoachListView.as_view(), name='coaches_list'),
+    url(r'^new/$', CoachCreateView.as_view(), name='coach_new'),
+    url(r'^(?P<pk>\d+)/$', CoachDetailView.as_view(), name='coach_item'),
+    url(r'^edit/(?P<pk>\d+)/$', CoachUpdateView.as_view(), name='coach_edit'),
+    url(r'^delete/(?P<pk>\d+)/$', CoachDeleteView.as_view(), name='coach_delete'),
 
 
 )

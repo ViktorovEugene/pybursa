@@ -8,8 +8,8 @@
         <form method="post">
           {% csrf_token %}
           <ul class="list-group">
-            {% for boundfield, field in form %}
-              <li class="list-group-item">{# field.label_tag #}{{ boundfield }}</li>
+            {% for boundfield in form %}
+              <li class="list-group-item">{{ boundfield.name }} {{ boundfield }}</li>
               <!-- тут у меня не получилось вывести имена полей, буду благодарен
               ели подскажете, как это сделать правильно -->
             {% endfor %}

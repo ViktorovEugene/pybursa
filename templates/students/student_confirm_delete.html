@@ -1,0 +1,16 @@
+{% extends "students/base.html" %}
+
+
+{% block content %}
+    <div class="container">
+        <h1>{{ title }}</h1>
+        <form action="" method="post">{% csrf_token %}
+          <h3>Are you sure you want to delete {{ object.name }}
+            {{ object.surname }}</h3>
+          <div class="btn-group" role="group" aria-label="...">
+            <input type='submit' class='btn btn-danger' value="delete"/>
+            <a href="{% url 'students_list' %}" class="btn btn-default">cancel</a>
+          </div>
+        </form>
+    </div>
+{% endblock content %}

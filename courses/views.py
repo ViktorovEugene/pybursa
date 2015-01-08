@@ -1,50 +1,52 @@
-from django.shortcuts import render, redirect
+from django.core.urlresolvers import reverse_lazy
+
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
+from pybursa.loggers import LoggingMix
+from pybursa.decorators import (delete_logging_method_decorator,
+								create_logging_method_decorator,
+								update_logging_method_decorator)
+
 from courses.models import Course
-from django import forms
 
 
-class CourseForm(forms.ModelForm):
-	class Meta:
-		model = Course
+class CourseListView(ListView):
+	model = Course
+	template_name = 'courses/list.html'
+	context_object_name = 'courses'
 
 
-def courses_list(request):
-    courses = Course.objects.all()
-    return render(request, 'courses/list.html', {'courses': courses},)
+class CourseDetailView(DetailView):
+	model = Course
+	template_name = 'courses/item.html'
+	context_object_name = 'course'
 
-def course_item(request, course_id):
-    course = Course.objects.get(id=course_id)
-    return render(request, 'courses/item.html', {'course': course},)
 
-def course_edit(request, course_id):
-	title = 'Edit course'
-	course = Course.objects.get(id=course_id)
-	if request.method == 'POST':
-		form = CourseForm(request.POST, instance=course)
-		if form.is_valid():
-			course = form.save()
-			return redirect('course_edit', course.id,)
-	else:
-		form = CourseForm(instance=course)
+class CourseCreateView(LoggingMix, CreateView):
+	model = Course
+	template_name = 'courses/edit.html'
+	success_url = reverse_lazy('courses_list')
 
-	return render(request, 'courses/edit.html',
-		                   {'form': form,
-		                    'title': title,
-		                    'course': course})
+	@create_logging_method_decorator
+	def get_success_url(self, *args, **kwargs):
+		return super(CourseCreateView, self).get_success_url(*args, **kwargs)
 
-def course_new(request):
-	title = 'Add new course'
-	if request.method == "POST":
-		form = CourseForm(request.POST)
-		if form.is_valid():
-			course = form.save()
-			return redirect('courses_list')
-	else:
-		form = CourseForm()
-	return render(request, 'courses/edit.html', {'form': form,
-												 'title': title})
 
-def course_delete(request, course_id):
-	course = Course.objects.get(id=course_id)
-	course.delete()
-	return redirect('courses_list')
+class CourseUpdateView(LoggingMix, UpdateView):
+	model = Course
+	template_name  = 'courses/edit.html'
+
+	@update_logging_method_decorator
+	def get_success_url(self, *args, **kwargs):
+		return super(CourseUpdateView, self).get_success_url(*args, **kwargs)
+
+
+class CourseDeleteView(LoggingMix, DeleteView):
+	model = Course
+	success_url = reverse_lazy('courses_list')
+
+	@delete_logging_method_decorator
+	def get_success_url(self, *args, **kwargs):
+		return super(CourseDeleteView, self).get_success_url(*args, **kwargs)

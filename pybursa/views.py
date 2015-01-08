@@ -1,5 +1,5 @@
 from django import forms
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse_lazy
 from django.contrib import messages
@@ -8,10 +8,11 @@ from django.template.loader import render_to_string
 
 from coaches.models import Coach
 from students.models import Student
-from courses.models import Course
+
+from pybursa.loggers import LoggingMix
 
 
-class DelationForm(forms.Form):
+class DelationForm(LoggingMix, forms.Form):
 	email = forms.EmailField(label='Your Email', initial='example@mail.com')
 	theme = forms.CharField(max_length=255,label='Theme', 
 							initial='denunciation of the poor student')
@@ -34,7 +35,18 @@ class DelationForm(forms.Form):
 			[data['coach'].email]
 		)
 		messages.success(request, 'Message was send.')
-
+		self.debug('Delation massage was send from %s to %s.' % 
+					(
+					data['email'],
+					data['coach'].email, 
+					)
+		)
+		self.info('Delation massage was send from %s to %s.' % 
+					(
+					data['email'],
+					data['coach'].email, 
+					)
+		)
 
 class DelationView(FormView):
 	template_name = 'pybursa/form.html'

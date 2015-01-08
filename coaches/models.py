@@ -14,5 +14,8 @@ class Coach(models.Model):
     phone_number = models.CharField(max_length=15, default='+38000000000')
     user = models.ForeignKey(User, blank=True, default='')
 
+    def get_absolute_url(self):
+        return "/coaches/%i/" % self.id
+
     def __unicode__(self):
         return "%s %s %s" % (self.surname, self.name, self.status)
